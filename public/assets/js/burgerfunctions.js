@@ -51,7 +51,6 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
           body: JSON.stringify(eatenStatus),
         }).then((response) => {
-          console.log(response);
           if (response.ok) {
             console.log(`Burger was now: ${eaten}`);
             location.reload();
