@@ -1,5 +1,15 @@
 const connection = require("./connection.js");
 
+const printQuestionMarks = (num) => {
+  const arr = [];
+
+  for (let i = 0; i < num; i++) {
+    arr.push("?");
+  }
+
+  return arr.toString();
+};
+
 const objToSql = (ob) => {
   const arr = [];
 
@@ -32,12 +42,14 @@ const orm = {
       callback(result);
     });
   },
-  insertOne(table, columns, values, callback) {
-    let query = `INSERT INTO ${table}`;
+  insertOne(table, columns, vals, callback) {
+    let query = `INSERT INTO ${table} `;
     query += "(";
     query += columns.toString();
-    query += ")";
-    query += `VALUES (?)`;
+    query += ") ";
+    query += "VALUES (";
+    query += printQuestionMarks(vals.length);
+    query += ") ";
 
     connection.query(query, vals, (err, result) => {
       if (err) {
