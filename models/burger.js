@@ -8,6 +8,10 @@ const burger = {
   insertOne(columns, values, callback) {
     orm.insertOne("burgers", columns, values, (res) => callback(res));
   },
+
+  updateOne(objColVals, status, callback) {
+    orm.updateOne("burgers", objColVals, status, (res) => callback(res));
+  },
 };
 
 module.exports = burger;

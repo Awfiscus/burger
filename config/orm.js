@@ -59,6 +59,21 @@ const orm = {
       callback(result);
     });
   },
+  updateOne(table, objColVals, status, callback) {
+    let query = `UPDATE ${table}`;
+    query += " SET ";
+    query += objToSql(objColVals);
+    query += " WHERE ";
+    query += status;
+
+    console.log(query);
+    connection.query(query, (err, result) => {
+      if (err) {
+        throw err;
+      }
+      callback(result);
+    });
+  },
 };
 
 module.exports = orm;

@@ -29,4 +29,37 @@ document.addEventListener("DOMContentLoaded", (event) => {
       });
     });
   }
+
+  const eatTheBurgerBtn = document.querySelectorAll(".change-devoured");
+
+  if (eatTheBurgerBtn) {
+    eatTheBurgerBtn.forEach((button) => {
+      button.addEventListener("click", (e) => {
+        const id = e.target.getAttribute("data-id");
+        const eaten = e.target.getAttribute("data-newdevoured");
+
+        const eatenStatus = {
+          devoured: eaten,
+        };
+
+        fetch(`/api/burgers/${id}`, {
+          method: "PUT",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+
+          body: JSON.stringify(eatenStatus),
+        }).then((response) => {
+          console.log(response);
+          if (response.ok) {
+            console.log(`Burger was now: ${eaten}`);
+            location.reload();
+          } else {
+            alert("Something is not right");
+          }
+        });
+      });
+    });
+  }
 });
